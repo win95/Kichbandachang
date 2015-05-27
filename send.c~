@@ -103,7 +103,7 @@ int batadv_send_skb_to_orig(struct sk_buff *skb,
 			    struct batadv_orig_node *orig_node,
 			    struct batadv_hard_iface *recv_if)
 {
-//   printk(KERN_INFO "da vao ham batadv_send_skb_to_orig\n");
+  printk(KERN_INFO "da vao ham batadv_send_skb_to_orig\n");
 	struct batadv_priv *bat_priv = orig_node->bat_priv;
 	struct batadv_neigh_node *neigh_node;
 	int ret = NET_XMIT_DROP;

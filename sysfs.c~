@@ -786,9 +786,9 @@ static ssize_t batadv_store_mesh_iface(struct kobject *kobj,
 	if (hard_iface->if_status != BATADV_IF_NOT_IN_USE)
 		batadv_hardif_disable_interface(hard_iface,
 						BATADV_IF_CLEANUP_AUTO);
-//     printk(KERN_ALERT "Send OGMs packet: 7-1\n");
+    printk(KERN_ALERT "Send OGMs packet: 7-1\n");
 	ret = batadv_hardif_enable_interface(hard_iface, buff);
-// 	printk(KERN_ALERT "Send OGMs packet: 7-1\n");
+	printk(KERN_ALERT "Send OGMs packet: 7-1\n");
 
 unlock:
 	rtnl_unlock();

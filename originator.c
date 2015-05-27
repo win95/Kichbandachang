@@ -987,6 +987,37 @@ int batadv_orig_seq_print_text(struct seq_file *seq, void *offset)
 	return 0;
 }
 
+/*dz*/
+int batadv_orig_seq_dz_show(struct seq_file *seq, void *offset)
+{
+	struct net_device *net_dev = (struct net_device *)seq->private;
+	struct batadv_priv *bat_priv = netdev_priv(net_dev);
+	struct batadv_hard_iface *primary_if;
+
+	primary_if = batadv_seq_print_text_primary_if_get(seq);
+	if (!primary_if)
+		return 0;
+
+	//seq_printf(seq, "[B.A.T.M.A.N. adv %s, MainIF/MAC: %s/%pM (%s %s)]\n",
+	//	   BATADV_SOURCE_VERSION, primary_if->net_dev->name,
+	//	   primary_if->net_dev->dev_addr, net_dev->name,
+	//	   bat_priv->bat_algo_ops->name);
+
+	batadv_hardif_free_ref(primary_if);
+
+	if (!bat_priv->bat_algo_ops->bat_dz_print) {
+		seq_puts(seq,
+			 "No printing function for this routing protocol\n");
+		return 0;
+	}
+
+	bat_priv->bat_algo_ops->bat_dz_print(bat_priv, seq,
+					       BATADV_IF_DEFAULT);
+
+	return 0;
+}
+/*dz*/
+
 /**
  * batadv_orig_hardif_seq_print_text - writes originator infos for a specific
  *  outgoing interface

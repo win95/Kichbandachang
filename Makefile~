@@ -63,6 +63,7 @@ unload:
 load:
 	sudo modprobe libcrc32c
 	sudo insmod ./batman-adv.ko
+	sudo batctl if add wlan1
 
 install: config
 	$(MAKE) -C $(KERNELPATH) M=$(PWD) PWD=$(PWD) INSTALL_MOD_DIR=updates/net/batman-adv/ modules_install

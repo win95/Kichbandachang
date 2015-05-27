@@ -244,6 +244,10 @@ struct batadv_orig_bat_iv {
 struct batadv_orig_node {
 	uint8_t orig[ETH_ALEN];
 	uint8_t primary_addr[ETH_ALEN];
+	
+	/*dz*/
+	uint8_t test[4];
+	
 	struct hlist_head ifinfo_list;
 	struct batadv_orig_ifinfo *last_bonding_candidate;
 #ifdef CONFIG_BATMAN_ADV_DAT
@@ -1151,6 +1155,10 @@ struct batadv_algo_ops {
 			       int max_if_num);
 	int (*bat_orig_del_if)(struct batadv_orig_node *orig_node,
 			       int max_if_num, int del_if_num);
+	/*dz*/
+	void (*bat_dz_print)(struct batadv_priv *priv, struct seq_file *seq,
+			       struct batadv_hard_iface *hard_iface);
+	/*dz*/
 };
 
 /**

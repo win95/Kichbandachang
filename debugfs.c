@@ -33,6 +33,10 @@
 
 static struct dentry *batadv_debugfs;
 
+/*thaodz*/
+#include <linux/mm.h>
+struct dentry  *file1;
+
 #ifdef CONFIG_BATMAN_ADV_DEBUG
 #define BATADV_LOG_BUFF_MASK (batadv_log_buff_len - 1)
 
@@ -194,6 +198,10 @@ static const struct file_operations batadv_log_fops = {
 	.llseek         = no_llseek,
 };
 
+/*thaodz*/
+
+/*thaodz*/
+
 static int batadv_debug_log_setup(struct batadv_priv *bat_priv)
 {
 	struct dentry *d;
@@ -247,6 +255,14 @@ static int batadv_originators_open(struct inode *inode, struct file *file)
 	struct net_device *net_dev = (struct net_device *)inode->i_private;
 	return single_open(file, batadv_orig_seq_print_text, net_dev);
 }
+
+/*dz*/
+static int batadv_dz_show(struct inode *inode, struct file *file)
+{
+	struct net_device *net_dev = (struct net_device *)inode->i_private;
+	return single_open(file, batadv_orig_seq_dz_show, net_dev);
+}
+/*dz*/
 
 /**
  * batadv_originators_hardif_open - handles debugfs output for the
@@ -346,6 +362,9 @@ static struct batadv_debuginfo *batadv_general_debuginfos[] = {
 };
 
 /* The following attributes are per soft interface */
+/*dz*/
+static BATADV_DEBUGINFO(dz_show, S_IRUGO, batadv_dz_show);
+/*dz*/
 static BATADV_DEBUGINFO(originators, S_IRUGO, batadv_originators_open);
 static BATADV_DEBUGINFO(gateways, S_IRUGO, batadv_gateways_open);
 static BATADV_DEBUGINFO(transtable_global, S_IRUGO,
@@ -365,6 +384,9 @@ static BATADV_DEBUGINFO(nc_nodes, S_IRUGO, batadv_nc_nodes_open);
 #endif
 
 static struct batadv_debuginfo *batadv_mesh_debuginfos[] = {
+  /*dz*/
+	&batadv_debuginfo_dz_show,
+  /*dz*/
 	&batadv_debuginfo_originators,
 	&batadv_debuginfo_gateways,
 	&batadv_debuginfo_transtable_global,
@@ -427,6 +449,10 @@ void batadv_debugfs_init(void)
 			goto err;
 		}
 	}
+	
+	/*thaodz*/
+	//file1 = debugfs_create_file("mmap_example", 0644, NULL, NULL, &my_fops);
+	//printk(KERN_ALERT "init success\n");
 
 	return;
 err:

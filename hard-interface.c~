@@ -369,7 +369,7 @@ int batadv_hardif_enable_interface(struct batadv_hard_iface *hard_iface,
 {
 //     printk(KERN_ALERT "*******************************\n");
 //     printk(KERN_ALERT "Go to: batadv_iv_ogm_schedule\n");
-//   printk(KERN_ALERT "Send OGMs packet: 6-0\n");
+  printk(KERN_ALERT "Send OGMs packet: 6-0\n");
 	struct batadv_priv *bat_priv;
 	struct net_device *soft_iface, *master;
 	__be16 ethertype = htons(ETH_P_BATMAN);
@@ -447,7 +447,7 @@ int batadv_hardif_enable_interface(struct batadv_hard_iface *hard_iface,
 			    "The MTU of interface %s is too small (%i) to handle the transport of batman-adv packets. Packets going over this interface will be fragmented on layer2 which could impact the performance. Setting the MTU to %i would solve the problem.\n",
 			    hard_iface->net_dev->name, hard_iface->net_dev->mtu,
 			    ETH_DATA_LEN + max_header_len);
-// printk(KERN_ALERT "Send OGMs packet: 6-0\n");
+printk(KERN_ALERT "Send OGMs packet: 6-0\n");
 	if (!atomic_read(&bat_priv->fragmentation) &&
 	    hard_iface->net_dev->mtu < ETH_DATA_LEN + max_header_len)
 		batadv_info(hard_iface->soft_iface,
@@ -463,7 +463,7 @@ int batadv_hardif_enable_interface(struct batadv_hard_iface *hard_iface,
 			   hard_iface->net_dev->name);
 
 	/* begin scheduling originator messages on that interface */
-// 	printk(KERN_ALERT "Send OGMs packet: 6-1\n");
+	printk(KERN_ALERT "Send OGMs packet: 6-1\n");
 	batadv_schedule_bat_ogm(hard_iface);
 
 out:
